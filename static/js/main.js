@@ -1,31 +1,44 @@
 document.addEventListener("DOMContentLoaded", function () {
-  function consultarCep() {
-    const cep = document.getElementById("cep").value;
+    let button = document.querySelector(".js-btn-resultado");
+    let inputCep = document.querySelector(".js-input-cep");
 
-    fetch("http://localhost:5000/consultar-cep", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ cep }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        document.getElementById("resultado").textContent = JSON.stringify(
-          data,
-          null,
-          4
-        );
-      })
-      .catch((err) => {
-        document.getElementById("resultado").textContent =
-          "Erro: " + err.message;
-      });
-  }
+    // Função para atualizar estado do botão conforme valor do input
+    function atualizarBotao() {
+        if (inputCep.value.trim() === "") {
+            button.disabled = true;
+        } else {
+            button.disabled = false;
+        }
+    }
 
-  let button = document.querySelector(".js-btn-resultado");
+    // Chama ao carregar para definir estado inicial
+    atualizarBotao();
 
-  button.addEventListener("click", function () {
-    consultarCep();
-  });
+    // Adiciona evento input no campo para atualizar botão dinamicamente
+    inputCep.addEventListener("input", atualizarBotao);
+
+    button.addEventListener("click", function () {
+        consultarCep();
+    });
+
+    function consultarCep() {
+        const cep = inputCep.value;
+
+        fetch("http://localhost:5000/consultar-cep", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cep }),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                document.getElementById("resultado").textContent =
+                    JSON.stringify(data, null, 4);
+            })
+            .catch((err) => {
+                document.getElementById("resultado").textContent =
+                    "Erro: " + err.message;
+            });
+    }
 });
