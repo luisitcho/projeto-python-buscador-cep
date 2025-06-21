@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Nome do ambiente virtual
+VENV="./venv"
+
+# Verifica se o ambiente virtual já existe
+if [ ! -d "$VENV" ]; then
+  echo "🔧 Criando ambiente virtual..."
+  python3 -m venv venv
+fi
+
+# Ativa o ambiente virtual
+source venv/bin/activate
+
+# Instala as dependências com quebra de sistema permitida
+echo "📦 Instalando dependências..."
+pip install --break-system-packages -r requirements.txt
+
+# Executa o app Flask
+echo "🚀 Iniciando servidor Flask..."
+python main.py

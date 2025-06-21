@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de CEP</title>
+    <link rel="stylesheet" href="./src/output.css">
+</head>
+
+<body class="bg-gray-950">
+
+    <main class="main">
+        <div class="container">
+            <div class="dados my-5">
+                <h1 class="text-3xl text-green-50 font-bold mb-5">Buscador de CEP</h1>
+
+                <div class="flex flex-col gap-3 w-full max-w-[700px]">
+                    <input type="text" id="cep" placeholder="Digite o CEP (ex: 01001000)" class="js-input-cep bg-green-50 p-[5px] rounded font-medium transition">
+                    <button class="js-btn-resultado text-green-50 bg-gray-700 p-[5px] rounded font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-950" disabled>Consultar</button>
+                </div>
+            </div>
+
+            <code id="resultado"></code>
+        </div>
+    </main>
+
+    <script defer src="./js/main.js"></script>
+</body>
+
+</html>
