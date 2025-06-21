@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
 
-                resultado.innerHTML = html; // só faz o append uma vez, com todo o conteúdo
+                resultado.innerHTML = html;
             })
             .catch(() => {
                 resultado.textContent = "Erro ao consultar o CEP.";
