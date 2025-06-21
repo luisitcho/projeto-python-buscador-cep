@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let button = document.querySelector(".js-btn-resultado");
     let inputCep = document.querySelector(".js-input-cep");
+    let resultado = document.querySelector(".js-resultado");
 
     // Função para atualizar estado do botão conforme valor do input
     function atualizarBotao() {
@@ -33,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then((res) => res.json())
             .then((data) => {
-                document.getElementById("resultado").textContent =
+                resultado.textContent =
                     JSON.stringify(data, null, 4);
             })
             .catch((err) => {
-                document.getElementById("resultado").textContent =
+                resultado.textContent =
                     "Erro: " + err.message;
             });
     }

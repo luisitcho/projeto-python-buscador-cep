@@ -1,9 +1,19 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import requests
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
-CORS(app)  # Libera o acesso do front-end
+CORS(app)
+
+# Rota para carregar o HTML
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')  # templates/index.html
+
+# Rota de consulta ao ViaCEP
 
 
 @app.route('/consultar-cep', methods=['POST'])
@@ -12,6 +22,7 @@ def consultar_cep():
     cep = data.get('cep', '').strip().replace('-', '')
 
     print(f"CEP recebido: {cep}")  # Log para depuração
+
     if not cep:
         return jsonify({'erro': 'CEP não informado'}), 400
 
@@ -35,4 +46,5 @@ def consultar_cep():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
