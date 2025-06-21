@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (cep === "") return;
 
-        fetch("http://localhost:5000/consultar-cep", {
+        fetch("/consultar-cep", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
