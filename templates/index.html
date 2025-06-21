@@ -15,25 +15,13 @@
             <div class="dados my-5">
                 <h1 class="text-3xl text-green-50 font-bold mb-5">Buscador de CEP</h1>
 
-                <div class="alert alert--hidden js-alerta hidden border border-red-400 bg-red-100 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="alert__titulo js-titulo-alerta font-bold">Erro:</strong>
-                    <span class="alert__mensagem js-mensagem-alerta block sm:inline">Mensagem de erro aqui.</span>
-                    <span class="alert__fechar js-fechar-alerta absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer">
-                        <svg class="fill-current h-6 w-6 text-red-700" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <title>Fechar</title>
-                        <path d="M14.348 5.652a1 1 0 10-1.414-1.414L10 7.172 7.066 4.238a1 1 0 10-1.414 1.414L8.828 10l-3.176 3.176a1 1 0 101.414 1.414L10 12.828l2.934 2.934a1 1 0 001.414-1.414L11.172 10l3.176-3.176z"/>
-                        </svg>
-                    </span>
-                </div>
-
-
                 <div class="flex flex-col gap-3 w-full max-w-[700px]">
                     <input type="text" id="cep" placeholder="Digite o CEP (ex: 01001000)" class="js-input-cep bg-green-50 p-[5px] rounded font-medium transition">
                     <button class="js-btn-resultado text-green-50 bg-gray-700 p-[5px] rounded font-medium cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-950 transition delay-150 duration-300" disabled>Consultar</button>
                 </div>
             </div>
 
-            <code class="js-resultado rounded"></code>
+            <code class="js-resultado flex flex-col gap-2 rounded p-[5px] bg-gray-300 hidden"></code>
         </div>
     </main>
 

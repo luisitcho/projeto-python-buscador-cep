@@ -21,7 +21,7 @@ def consultar_cep():
     data = request.get_json()
     cep = data.get('cep', '').strip().replace('-', '')
 
-    print(f"CEP recebido: {cep}")  # Log para depuração
+    print(f"CEP recebido: {cep}")
 
     if not cep:
         return jsonify({'erro': 'CEP não informado'}), 400

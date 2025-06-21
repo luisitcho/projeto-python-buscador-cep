@@ -1,29 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let button = document.querySelector(".js-btn-resultado");
-    let inputCep = document.querySelector(".js-input-cep");
-    let resultado = document.querySelector(".js-resultado");
+    const button = document.querySelector(".js-btn-resultado");
+    const inputCep = document.querySelector(".js-input-cep");
+    const resultado = document.querySelector(".js-resultado");
 
-    // Função para atualizar estado do botão conforme valor do input
     function atualizarBotao() {
-        if (inputCep.value.trim() === "") {
-            button.disabled = true;
-        } else {
-            button.disabled = false;
-        }
+        button.disabled = inputCep.value.trim() === "";
     }
 
-    // Chama ao carregar para definir estado inicial
     atualizarBotao();
 
-    // Adiciona evento input no campo para atualizar botão dinamicamente
     inputCep.addEventListener("input", atualizarBotao);
 
     button.addEventListener("click", function () {
-        consultarCep();
-    });
+        const cep = inputCep.value.trim();
 
-    function consultarCep() {
-        const cep = inputCep.value;
+        if (cep === "") return;
 
         fetch("http://localhost:5000/consultar-cep", {
             method: "POST",
@@ -34,12 +25,27 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then((res) => res.json())
             .then((data) => {
-                resultado.textContent =
-                    JSON.stringify(data, null, 4);
+                let html = "";
+
+                resultado.classList.remove("hidden");
+
+                for (const chave in data) {
+                    if (data.hasOwnProperty(chave)) {
+                        const valor = data[chave];
+
+                        html += `
+                            <div class="flex">
+                                <strong class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">${chave}:</strong> 
+                                <strong class="font-bold">${valor}</strong>
+                            </div>
+                        `;
+                    }
+                }
+
+                resultado.innerHTML = html; // só faz o append uma vez, com todo o conteúdo
             })
-            .catch((err) => {
-                resultado.textContent =
-                    "Erro: " + err.message;
+            .catch(() => {
+                resultado.textContent = "Erro ao consultar o CEP.";
             });
-    }
+    });
 });
